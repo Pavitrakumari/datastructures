@@ -16,11 +16,12 @@
 var utility = require('/home/administrator/js/Datastructures/utility/utility.js');
 fs = require('fs');
 var data = fs.readFileSync('/home/administrator/js/Datastructures/main/file2.txt', 'utf8');
-console.log(data);                                        //to print the data given in text file
+console.log(data);
 data = data.toString().split(' ');
-data.sort(function (a, b) {                               //to sort the given data
+data.sort(function (a, b) {
     return a - b;
 });
+
 var readline = require('readline');
 var read = readline.createInterface(
     {
@@ -29,39 +30,45 @@ var read = readline.createInterface(
     }
 );
 function orderedList() {
+    //var array = [];
+    var list = new utility();
 
+    for (var i = 0; i < (data.length); i++)      /**adding data to list*/
+    {
+        list.add(data[i]);
+    }
+    console.log("ascending order of list: ");   /**Ascending order representation of list*/
+    var string = list.printList1();
+
+    console.log(string);
     
-
-        var list = new utility();                             //create an object for list class
-        for (var i = 0; i < (data.length); i++)               //adding data to list
+    read.question('Enter the element to search: ', function (element) {
+        if(isNaN(element)) 
         {
-            list.add(data[i]);
+            console.log("Please enter a numeric value to search...............");
+            return;
+            
         }
-        console.log(" Ascending order representation of the given list is : ")
-        list.printList();                    //print the ascending order representation of the given list
-        read.question('Enter a number  to search: ', function (element) {  //take user input to search the element
-        if (list.indexOf(element) == -1)                //if index is not found then add the element into the list
-         {
-            list.add(element);
-            var l1=[];
-            l1 = list.printList1();
-             l2=list.sort(l1);                      //sort the list after the element is added into the list     
-           console.log(l2);                          //print the list which is sorted
-
+        //string = list.printList();
+        if (list.indexOf(element) == -1) {
+            list.insertSort(parseInt(element));      /**inserts an element at appropriate position*/
         }
-        else                                        //if the element is not found among the give input then 
-        {
-            list.removeElement(element);             //remove the element from the list
-            list.printList();                        //print the modified list after removing the element
-
-       }
-
-
+        else {
+            list.removeElement(element);              /**Removes the element from the list */
+        }
+        string = list.printList1();
+        console.log(string);                         /**prints the elements in the list */
+        fs.writeFileSync('/home/administrator/js/Datastructures/main/file2.txt', string);
 
         read.close();
+
     });
 }
 orderedList();
+
+
+
+
 
 
 

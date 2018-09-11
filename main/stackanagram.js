@@ -1,3 +1,20 @@
+/******************************************************************************
+*  Execution       :   1. default node         cmd> node stackanagram.js 
+*        
+*  Purpose         :  To add the Prime Numbers that are Anagram in the Range of 0-1000 in a Stack using linkedlist
+* 
+*  Description    
+* 
+*  @file           : stackanagram.js
+*  @overview       : primeanagram module to add the Prime Numbers that are Anagram in the Range of 0-1000 in a Stack using linkedlist
+
+*  @module         : stackanagram.js- This is optional if expeclictly its an npm or local package
+*  @author         : Pavitrakumari <pavithra.korapati@gmail.com>
+*  @version        : 4.0
+*  @since          : 06-09-2018
+*
+******************************************************************************/
+
 var utility1 = require('/home/administrator/js/Datastructures/utility/utility.js')
 let prompt = require('prompt-sync')();
 
@@ -5,8 +22,8 @@ let utility = require('/home/administrator/js/Datastructures/utility/utilityall.
 
 let utility3 = require('/home/administrator/js/Datastructures/utility/utility2.js');
 
-let re = /[a-zA-Z]/g;
-let re2 = /[!@#$%^&*().<>+-/*"'`~]/g;
+let reg = /[a-zA-Z]/g;
+let reg2 = /[!@#$%^&*().<>+-/*"'`~]/g;
 
 let prime = [];
 
@@ -14,19 +31,19 @@ let anag = [];
 
 function main() {
 
-    let num1 = prompt(' Number 1: ');
-    let num2 = prompt(' Number 2: ');
+    let num1 = prompt('Enter the minimum number : ');
+    let num2 = prompt('Enter the maximum number : ');
 
 
-    if (num1.search(re) == -1 && num2.search(re2) == -1 && num1 >= 0 && num2 > 0 && num1 < 1001 && num2 < 1001) {
+    if (num1.search(reg) == -1 && num2.search(reg2) == -1 && num1 >= 0 && num2 > 0 && num1 < 1001 && num2 < 1001) {
 
         num1 = parseInt(num1);
         num2 = parseInt(num2);
 
-        prime = utility.prime(num1, num2);
+        prime = utility.prime(num1, num2);     //get all the prime numbers between the given range
 
         console.log('Prime are .................');
-        console.log(prime);
+        console.log(prime);                    //print all the prime numbers between the given range
 
         let anagram = [];
 
@@ -40,7 +57,8 @@ function main() {
 
                 let res1 = utility.anagrams(index1, index2);
 
-                if (res1) {
+                if (res1) 
+                {
                     anagram.push(prime[i]);
                     anagram.push(prime[j]);
                 }
